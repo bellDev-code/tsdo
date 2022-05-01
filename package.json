@@ -1,0 +1,25 @@
+{
+  "name": "tsdo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && cp -r public/* build",
+    "dev": "live-server build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bellDev-code/tsdo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bellDev-code/tsdo/issues"
+  },
+  "homepage": "https://github.com/bellDev-code/tsdo#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "typescript": "^4.6.4"
+  }
+}
