@@ -8,10 +8,17 @@
 </head>
 <body>
   <form id="todoForm">
-    <input id="todoInput" type="text" ></input>
-    <button id="addBtn" onsubmit="">+</button>
-  </form>   
-  <script src="./scripts/app.js">
-  </script>
+    <input id="titleInput" type="text" placeholder="title"></input>
+    <input id="todoInput" type="text" placeholder="contents" ></input>
+    <button id="addBtn" type="button">+</button>
+    <button id="allDelBtn" type="button">all 삭제</button>
+  </form>
+
+  <ul id="todo__list">
+  </ul>
+
+
+  <script src="./scripts/app.js"></script>
+  <script src="./scripts/store.js"></script>
 </body>
 </html>
