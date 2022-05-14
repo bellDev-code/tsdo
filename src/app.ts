@@ -39,9 +39,10 @@ addBtn.addEventListener('click', function(e) {
     todoElem.appendChild(convertInputContents)
     todoElem.appendChild(changeBtn)
 
-    // changeBtn.addEventListener('click', function() {
-    //   chanageTodo(todolist, )
-    // })
+    changeBtn.addEventListener('click', function() {
+      
+    })
+
   })
   
   todoListBox.appendChild(todoElem)
