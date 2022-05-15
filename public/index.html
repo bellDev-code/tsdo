@@ -4,19 +4,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./output.css" rel="stylesheet">
   <title>Document</title>
 </head>
 <body>
-  <form id="todoForm">
-    <input id="titleInput" type="text" placeholder="title"></input>
-    <input id="todoInput" type="text" placeholder="contents" ></input>
-    <button id="addBtn" type="button">+</button>
-    <button id="allDelBtn" type="button">all 삭제</button>
-  </form>
+  <div class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
+    <form id="todoForm">
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker" id="titleInput" type="text" placeholder="title"></input>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker" id="todoInput" type="text" placeholder="contents" ></input>
+      <button class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-blue-500 hover:bg-teal" id="addBtn" type="button">+</button>
+      <button class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-red-600 hover:bg-teal" id="allDelBtn" type="button">all 삭제</button>
+      <button class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-green-500 hover:bg-teal" id="titleSort">제목정렬</button>
+    </form>
+  </div>
 
   <ul id="todo__list">
   </ul>
-
 
   <script src="./scripts/app.js"></script>
   <script src="./scripts/store.js"></script>

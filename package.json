@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "tailwindcss -i ./src/input.css -o ./build/output.css",
     "build": "tsc && cp -r public/* build",
     "watch": "tsc-watch",
     "liveserver": "live-server build",
@@ -22,8 +23,8 @@
   "homepage": "https://github.com/bellDev-code/tsdo#readme",
   "devDependencies": {
     "live-server": "^1.2.2",
-    "typescript": "^4.6.4",
-    "tsc-watch": "^5.0.3"
-  },
-  "dependencies": {}
+    "tailwindcss": "^3.0.24",
+    "tsc-watch": "^5.0.3",
+    "typescript": "^4.6.4"
+  }
 }
