@@ -3,5 +3,5 @@ type TodoItem = {
   title : string;
   contents: string;
   createdAt? : Date;
-  changedAt? : Date;
+  updatedAt? : Date;
 }

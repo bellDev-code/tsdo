@@ -40,7 +40,10 @@ addBtn.addEventListener('click', function(e) {
     todoElem.appendChild(changeBtn)
 
     changeBtn.addEventListener('click', function() {
-      
+      const todoItem = updateTodo(todolist, todo.id, convertInputTitle.value, convertInputContents.value, new Date())
+
+      titleDiv.innerText = todoItem.title
+      contentsDiv.innerText = todoItem.contents
     })
 
   })
@@ -91,3 +94,4 @@ todoInput.addEventListener('keypress', (e) =>{
 allDelBtn.addEventListener('click', function() {
   todoListBox.remove()
 })
+
