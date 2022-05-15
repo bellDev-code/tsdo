@@ -1,8 +1,8 @@
 const todolist: TodoItem[] = [];
 
 // todo 더하기
-function addTodo(todolist: TodoItem[], title: string, contents: string, createdAt: Date) {
-  const item = {id: todolist.length + 1, title: title, contents: contents, createdAt: createdAt, updatedAt: createdAt }
+function addTodo(list: TodoItem[], title: string, contents: string, createdAt: Date) {
+  const item = {id: list.length + 1, title: title, contents: contents, createdAt: createdAt, updatedAt: createdAt }
 
   todolist.push(item)
 
@@ -39,5 +39,3 @@ const updateTodo = (todolist: TodoItem[], id: number, title: string, contents: s
 
     return todolist[index]
 }
-
-

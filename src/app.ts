@@ -4,13 +4,15 @@ const todoInput: HTMLInputElement = document.querySelector("#todoInput")!
 const todoListBox: HTMLUListElement = document.querySelector("#todo__list")!
 const titleInput: HTMLInputElement = document.querySelector("#titleInput")!
 const allDelBtn: HTMLButtonElement = document.querySelector("#allDelBtn")!
+const titleSortBtn: HTMLButtonElement = document.querySelector("#titleSort")!
 
 // 전체삭제 버튼 
 // 데이터 수정
 // + 정렬 가능하면 해보기 <정렬버튼을 title 기준 오름차순 내림차순, id별로 오름차순 내림차순
 
-addBtn.addEventListener('click', function(e) {
-  const todo = addTodo(todolist, titleInput.value, todoInput.value, new Date())
+// 검색기능, 페이지네이션
+
+function createTodo(item: TodoItem, container: HTMLUListElement) {
   const todoElem = document.createElement('li')
   const titleDiv = document.createElement('div')
   const contentsDiv = document.createElement('div')
@@ -21,8 +23,7 @@ addBtn.addEventListener('click', function(e) {
   convertBtn.innerText = '수정'
 
   deleteBtn.addEventListener('click', function() {
-    deleteTodo(todolist, todo.id)
-
+    deleteTodo(todolist, item.id)
     todoElem.remove()
   })
 
@@ -30,6 +31,8 @@ addBtn.addEventListener('click', function(e) {
     const convertInputTitle = document.createElement('input')
     const convertInputContents = document.createElement('input')
     const changeBtn = document.createElement('button')
+    
+    convertInputTitle.classList.add('bg-gray-500')
     
     convertInputTitle.placeholder = '제목을 수정해주세요'
     convertInputContents.placeholder = '내용을 수정해주세요'
@@ -40,15 +43,16 @@ addBtn.addEventListener('click', function(e) {
     todoElem.appendChild(changeBtn)
 
     changeBtn.addEventListener('click', function() {
-      const todoItem = updateTodo(todolist, todo.id, convertInputTitle.value, convertInputContents.value, new Date())
+      onClickChange(item, convertInputTitle.value, convertInputContents.value, (item) => {
+        titleDiv.innerText = item.title
+        contentsDiv.innerText = item.contents
+      })
 
-      titleDiv.innerText = todoItem.title
-      contentsDiv.innerText = todoItem.contents
+      // onClickChange2(item, convertInputTitle.value, convertInputContents.value)({key: 'title', element: titleDiv}, {key:'contents', element: contentsDiv},)
     })
-
   })
   
-  todoListBox.appendChild(todoElem)
+  container.appendChild(todoElem)
   todoElem.appendChild(titleDiv)
   todoElem.appendChild(contentsDiv)
   todoElem.appendChild(deleteBtn)
@@ -56,9 +60,37 @@ addBtn.addEventListener('click', function(e) {
 
   titleDiv.style.borderBottom = '1px solid black'
 
-  titleDiv.innerHTML = '제목:' + titleInput.value
-  contentsDiv.innerHTML = '내용:' + todoInput.value
+  titleDiv.innerHTML = '제목:' + item.title
+  contentsDiv.innerHTML = '내용:' + item.contents
+}
 
+
+
+function onClickChange(item: TodoItem, title: string, contents: string, cb: (item: TodoItem) => void) {
+  const todoItem = updateTodo(todolist, item.id, title, contents, new Date())
+
+  return cb(todoItem)
+}
+
+function onClickChange2(item: TodoItem, title: string, contents: string) {
+  const todoItem = updateTodo(todolist, item.id, title, contents, new Date())
+
+  return function(...elems: {
+    key: keyof TodoItem
+    element:HTMLElement}[]) {
+    elems.forEach((elem) => {
+      const data = todoItem[elem.key];
+
+      if (typeof data === 'string') {
+        elem.element.innerText = data
+      }
+    })
+  }
+}
+
+addBtn.addEventListener('click', function(e) {
+  const todo = addTodo(todolist, titleInput.value, todoInput.value, new Date())
+  createTodo(todo, todoListBox)
 })
 
 todoInput.addEventListener('keypress', (e) =>{
@@ -95,3 +127,18 @@ allDelBtn.addEventListener('click', function() {
   todoListBox.remove()
 })
 
+
+titleSortBtn.addEventListener('click', function(e) {
+  e.preventDefault()
+
+  const sortItems = todolist.sort((a, b) => a.title.localeCompare(b.title))
+  const prevItems = todoListBox.querySelectorAll("li")
+
+  for (let i = 0; i < prevItems.length; i++) {
+    prevItems.item(i).remove()
+  }
+
+  for (let i = 0; i < sortItems.length; i++) {
+    createTodo(sortItems[i], todoListBox)
+  }
+})

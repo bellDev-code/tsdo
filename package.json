@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "tailwindcss -i ./src/input.css -o ./build/output.css",
-    "build": "tsc && cp -r public/* build",
+    "build": "tsc && cp -r public/* build && tailwindcss -i ./src/input.css -o ./build/output.css",
     "watch": "tsc-watch",
     "liveserver": "live-server build",
     "dev": "npm run build && npm run watch & npm run liveserver"
